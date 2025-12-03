@@ -1,36 +1,240 @@
 package ISO2.Exe2.service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import ISO2.Exe2.model.Customer;
+import ISO2.Exe2.model.CabinClass;
+import ISO2.Exe2.model.DestinationRegion;
 import ISO2.Exe2.model.FareOffer;
-import ISO2.Exe2.service.strategies.DiscoverEuropeStrategy;
-import ISO2.Exe2.service.strategies.DiscoverWorldStrategy;
-import ISO2.Exe2.service.strategies.GorrionStrategy;
-import ISO2.Exe2.service.strategies.PajarilloStrategy;
-import ISO2.Exe2.service.strategies.YoungTravelerStrategy;
 
+/**
+ * Fare Service divided into small, testable methods.
+ * Each rule is in its own method with only necessary parameters.
+ */
 public class FareService {
-    private final List<FareStrategy> strategies;
 
-    public FareService() {
-        // Order matters: more specific rules first
-        this.strategies = Arrays.asList(
-            new PajarilloStrategy(),
-            new GorrionStrategy(),
-            new YoungTravelerStrategy(),
-            new DiscoverEuropeStrategy(),
-            new DiscoverWorldStrategy()
-        );
+    /**
+     * Determines the most suitable fare offer for a customer based on their profile.
+     * Delegates to specific rule methods for better testability.
+     * 
+     * @param age Customer age in years
+     * @param flightsPerYear Number of flights taken per year
+     * @param isStudent Whether customer is a university student
+     * @param livesWithParents Whether customer lives with parents
+     * @param income Annual income in euros
+     * @param preferredClass Preferred cabin class (ECONOMY or BUSINESS)
+     * @param preferredRegion Preferred travel region
+     * @param travelsWithChildren Whether customer travels with children under 12
+     * @return FareOffer if eligible, null otherwise
+     */
+    public FareOffer determineFare(int age, int flightsPerYear, boolean isStudent, 
+                                   boolean livesWithParents, double income, 
+                                   CabinClass preferredClass, DestinationRegion preferredRegion, 
+                                   boolean travelsWithChildren) {
+        
+        // Check rules in order of priority
+        FareOffer offer;
+        
+        if ((offer = checkPajarilloFare(age, flightsPerYear)) != null) return offer;
+        if ((offer = checkGorrionFare(age, flightsPerYear, isStudent, preferredClass)) != null) return offer;
+        if ((offer = checkYoungTravelerFares(age, flightsPerYear, isStudent, livesWithParents, preferredClass)) != null) return offer;
+        if ((offer = checkDiscoverEuropeFares(age, income, flightsPerYear, preferredClass, preferredRegion, travelsWithChildren)) != null) return offer;
+        if ((offer = checkDiscoverWorldFares(age, income, flightsPerYear, preferredClass, preferredRegion, travelsWithChildren)) != null) return offer;
+        
+        return null;
     }
 
-    public Optional<FareOffer> findOffer(Customer c) {
-        for (FareStrategy s : strategies) {
-            Optional<FareOffer> offer = s.evaluate(c);
-            if (offer.isPresent()) return offer;
+    /**
+     * Rule 1: Pajarillo Fare
+     * For minors who travel frequently.
+     * 
+     * @param age Customer age
+     * @param flightsPerYear Number of flights per year
+     * @return Pajarillo offer or null
+     */
+    public FareOffer checkPajarilloFare(int age, int flightsPerYear) {
+        if (isMinor(age) && isFrequentFlyer(flightsPerYear)) {
+            return new FareOffer("Pajarillo", 10.0);
         }
-        return Optional.empty();
+        return null;
+    }
+
+    /**
+     * Rule 2: Gorrión Fare
+     * For young students traveling in economy class monthly.
+     * 
+     * @param age Customer age
+     * @param flightsPerYear Number of flights per year
+     * @param isStudent Whether customer is a student
+     * @param preferredClass Preferred cabin class
+     * @return Gorrión offer or null
+     */
+    public FareOffer checkGorrionFare(int age, int flightsPerYear, boolean isStudent, CabinClass preferredClass) {
+        if (isYoungAdult(age) && isStudent && isEconomyClass(preferredClass) && isVeryFrequentFlyer(flightsPerYear)) {
+            return new FareOffer("Gorrión", 15.0);
+        }
+        return null;
+    }
+
+    /**
+     * Rules 3 & 4: Young Traveler Fares
+     * For young workers traveling in economy class.
+     * 
+     * @param age Customer age
+     * @param flightsPerYear Number of flights per year
+     * @param isStudent Whether customer is a student
+     * @param livesWithParents Whether customer lives with parents
+     * @param preferredClass Preferred cabin class
+     * @return Young traveler offer or null
+     */
+    public FareOffer checkYoungTravelerFares(int age, int flightsPerYear, boolean isStudent, 
+                                             boolean livesWithParents, CabinClass preferredClass) {
+        if (isYoungAdult(age) && !isStudent && isRegularFlyer(flightsPerYear) && isEconomyClass(preferredClass)) {
+            if (livesWithParents) {
+                return new FareOffer("Travel While You Can", 5.0);
+            } else {
+                return new FareOffer("Daring to Leave the Nest", 25.0);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Rules 5 & 6: Discover Europe Fares
+     * For mature adults with middle income traveling to Europe in economy.
+     * 
+     * @param age Customer age
+     * @param income Annual income
+     * @param flightsPerYear Number of flights per year
+     * @param preferredClass Preferred cabin class
+     * @param preferredRegion Preferred travel region
+     * @param travelsWithChildren Whether customer travels with children
+     * @return Discover Europe offer or null
+     */
+    public FareOffer checkDiscoverEuropeFares(int age, double income, int flightsPerYear, 
+                                              CabinClass preferredClass, DestinationRegion preferredRegion, 
+                                              boolean travelsWithChildren) {
+        if (isMatureAdult(age) && hasMiddleIncome(income) && isFrequentFlyer(flightsPerYear) 
+            && isEconomyClass(preferredClass) && isEuropeDestination(preferredRegion)) {
+            
+            if (travelsWithChildren) {
+                return new FareOffer("Discover Europe with Your Little Ones", 10.0);
+            } else {
+                return new FareOffer("Discover Europe", 15.0);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Rules 7 & 8: Discover the World Fares
+     * For mature adults with high income traveling to Asia/America in business.
+     * 
+     * @param age Customer age
+     * @param income Annual income
+     * @param flightsPerYear Number of flights per year
+     * @param preferredClass Preferred cabin class
+     * @param preferredRegion Preferred travel region
+     * @param travelsWithChildren Whether customer travels with children
+     * @return Discover World offer or null
+     */
+    public FareOffer checkDiscoverWorldFares(int age, double income, int flightsPerYear, 
+                                             CabinClass preferredClass, DestinationRegion preferredRegion, 
+                                             boolean travelsWithChildren) {
+        if (isMatureAdult(age) && hasHighIncome(income) && isFrequentFlyer(flightsPerYear) 
+            && isBusinessClass(preferredClass) && isLongHaulDestination(preferredRegion)) {
+            
+            if (travelsWithChildren) {
+                return new FareOffer("Discover the World with Your Little Ones", 10.0);
+            } else {
+                return new FareOffer("Discover the World", 20.0);
+            }
+        }
+        return null;
+    }
+
+    // ========================================================================
+    // HELPER METHODS - Small, testable predicates
+    // ========================================================================
+
+    /**
+     * Checks if customer is a minor (age < 18).
+     */
+    public boolean isMinor(int age) {
+        return age < 18;
+    }
+
+    /**
+     * Checks if customer is a young adult (18-25 years old).
+     */
+    public boolean isYoungAdult(int age) {
+        return age >= 18 && age <= 25;
+    }
+
+    /**
+     * Checks if customer is a mature adult (age > 25).
+     */
+    public boolean isMatureAdult(int age) {
+        return age > 25;
+    }
+
+    /**
+     * Checks if customer is a regular flyer (>= 3 flights/year).
+     */
+    public boolean isRegularFlyer(int flightsPerYear) {
+        return flightsPerYear >= 3;
+    }
+
+    /**
+     * Checks if customer is a frequent flyer (>= 6 flights/year).
+     */
+    public boolean isFrequentFlyer(int flightsPerYear) {
+        return flightsPerYear >= 6;
+    }
+
+    /**
+     * Checks if customer is a very frequent flyer (>= 12 flights/year).
+     */
+    public boolean isVeryFrequentFlyer(int flightsPerYear) {
+        return flightsPerYear >= 12;
+    }
+
+    /**
+     * Checks if income is in middle range (20000 < income < 35000).
+     */
+    public boolean hasMiddleIncome(double income) {
+        return income > 20000 && income < 35000;
+    }
+
+    /**
+     * Checks if income is high (>= 35000).
+     */
+    public boolean hasHighIncome(double income) {
+        return income >= 35000;
+    }
+
+    /**
+     * Checks if preferred class is economy.
+     */
+    public boolean isEconomyClass(CabinClass preferredClass) {
+        return preferredClass == CabinClass.ECONOMY;
+    }
+
+    /**
+     * Checks if preferred class is business.
+     */
+    public boolean isBusinessClass(CabinClass preferredClass) {
+        return preferredClass == CabinClass.BUSINESS;
+    }
+
+    /**
+     * Checks if destination is Europe.
+     */
+    public boolean isEuropeDestination(DestinationRegion region) {
+        return region == DestinationRegion.EUROPE;
+    }
+
+    /**
+     * Checks if destination is long-haul (Asia or America).
+     */
+    public boolean isLongHaulDestination(DestinationRegion region) {
+        return region == DestinationRegion.ASIA || region == DestinationRegion.AMERICA;
     }
 }

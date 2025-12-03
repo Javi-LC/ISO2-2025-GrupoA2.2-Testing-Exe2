@@ -2,7 +2,7 @@ package ISO2.Exe2.model;
 
 /**
  * Value object that encapsulates demographic information about a customer.
- * This reduces the number of independent parameters in Customer.
+ * Simple data holder without business logic (logic is in FareService).
  */
 public class Demographics {
     private final int age;
@@ -25,17 +25,5 @@ public class Demographics {
 
     public boolean livesWithParents() {
         return livesWithParents;
-    }
-
-    public boolean isMinor() {
-        return age < 18;
-    }
-
-    public boolean isYoungAdult() {
-        return age >= 18 && age <= 25;
-    }
-
-    public boolean isMatureAdult() {
-        return age > 25;
     }
 }

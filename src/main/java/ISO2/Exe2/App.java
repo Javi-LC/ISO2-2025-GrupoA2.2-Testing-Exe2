@@ -40,13 +40,13 @@ public class App {
             // Display result
             System.out.println("\n" + "═".repeat(45));
             if (offer != null) {
-                System.out.println("✅ FARE OFFER FOUND!");
+                System.out.println("FARE OFFER FOUND!");
                 System.out.println("═".repeat(45));
                 System.out.println("Fare Name: " + offer.getName());
                 System.out.println("Discount:  " + offer.getDiscountPercentage() + "%");
                 System.out.println("═".repeat(45));
             } else {
-                System.out.println("ℹ️  NO SPECIAL OFFER AVAILABLE");
+                System.out.println("NO SPECIAL OFFER AVAILABLE");
                 System.out.println("═".repeat(45));
                 System.out.println("This customer profile does not match");
                 System.out.println("any of our promotional fares.");
@@ -54,11 +54,11 @@ public class App {
             }
             
         } catch (InputException e) {
-            System.err.println("\n❌ Error reading input: " + e.getMessage());
+            System.err.println("\nError reading input: " + e.getMessage());
         } catch (IllegalArgumentException e) {
-            System.err.println("\n❌ Invalid input value: " + e.getMessage());
+            System.err.println("\nInvalid input value: " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("\n❌ Unexpected error: " + e.getMessage());
+            System.err.println("\nUnexpected error: " + e.getMessage());
             e.printStackTrace();
         }
     }

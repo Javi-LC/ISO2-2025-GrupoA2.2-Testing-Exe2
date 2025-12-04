@@ -75,9 +75,15 @@ public class App {
         
         // Read age
         data.age = input.readWithParser("Age (years): ", new IntegerParser());
+        if (data.age < 0) {
+            throw new InputException("Age cannot be negative.");
+        }
         
         // Read flights per year
         data.flightsPerYear = input.readWithParser("Flights per year: ", new IntegerParser());
+        if (data.flightsPerYear < 0) {
+            throw new InputException("Number of flights cannot be negative.");
+        }
         
         // Read student status
         data.isStudent = input.readWithParser("Is student? (true/false): ", new BooleanParser());
@@ -87,6 +93,9 @@ public class App {
         
         // Read income
         data.income = input.readWithParser("Annual income (€): ", new DoubleParser());
+        if (data.income < 0) {
+            throw new InputException("Income cannot be negative.");
+        }
         
         // Read preferred class
         String classStr = input.readString("Preferred Class (ECONOMY/BUSINESS): ").toUpperCase().trim();

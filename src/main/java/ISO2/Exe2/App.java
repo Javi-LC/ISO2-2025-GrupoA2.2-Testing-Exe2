@@ -16,6 +16,14 @@ import parser.BooleanParser;
  * Simplified version that works directly with primitive types.
  */
 public class App {
+    
+    /** Default constructor. */
+    public App() { }
+    
+    /**
+     * Main entry point for the application.
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) {
         
         try {

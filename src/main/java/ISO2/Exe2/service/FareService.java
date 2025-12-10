@@ -10,6 +10,9 @@ import ISO2.Exe2.model.FareOffer;
  */
 public class FareService {
 
+    /** Default constructor. */
+    public FareService() { }
+
     /**
      * Determines the most suitable fare offer for a customer based on their profile.
      * Delegates to specific rule methods for better testability.
@@ -74,7 +77,7 @@ public class FareService {
     }
 
     /**
-     * Rules 3 & 4: Young Traveler Fares
+     * Rules 3 and 4: Young Traveler Fares.
      * For young workers traveling in economy class.
      * 
      * @param age Customer age
@@ -97,7 +100,7 @@ public class FareService {
     }
 
     /**
-     * Rules 5 & 6: Discover Europe Fares
+     * Rules 5 and 6: Discover Europe Fares.
      * For mature adults with middle income traveling to Europe in economy.
      * 
      * @param age Customer age
@@ -124,7 +127,7 @@ public class FareService {
     }
 
     /**
-     * Rules 7 & 8: Discover the World Fares
+     * Rules 7 and 8: Discover the World Fares.
      * For mature adults with high income traveling to Asia/America in business.
      * 
      * @param age Customer age
@@ -155,7 +158,9 @@ public class FareService {
     // ========================================================================
 
     /**
-     * Checks if customer is a minor (age < 18).
+     * Checks if customer is a minor (age less than 18).
+     * @param age the customer age
+     * @return true if age is less than 18
      */
     public boolean isMinor(int age) {
         return age < 18;
@@ -163,48 +168,62 @@ public class FareService {
 
     /**
      * Checks if customer is a young adult (18-25 years old).
+     * @param age the customer age
+     * @return true if age is between 18 and 25 inclusive
      */
     public boolean isYoungAdult(int age) {
         return age >= 18 && age <= 25;
     }
 
     /**
-     * Checks if customer is a mature adult (age > 25).
+     * Checks if customer is a mature adult (age greater than 25).
+     * @param age the customer age
+     * @return true if age is greater than 25
      */
     public boolean isMatureAdult(int age) {
         return age > 25;
     }
 
     /**
-     * Checks if customer is a regular flyer (>= 3 flights/year).
+     * Checks if customer is a regular flyer (3 or more flights per year).
+     * @param flightsPerYear number of flights per year
+     * @return true if flightsPerYear is 3 or more
      */
     public boolean isRegularFlyer(int flightsPerYear) {
         return flightsPerYear >= 3;
     }
 
     /**
-     * Checks if customer is a frequent flyer (>= 6 flights/year).
+     * Checks if customer is a frequent flyer (6 or more flights per year).
+     * @param flightsPerYear number of flights per year
+     * @return true if flightsPerYear is 6 or more
      */
     public boolean isFrequentFlyer(int flightsPerYear) {
         return flightsPerYear >= 6;
     }
 
     /**
-     * Checks if customer is a very frequent flyer (>= 12 flights/year).
+     * Checks if customer is a very frequent flyer (12 or more flights per year).
+     * @param flightsPerYear number of flights per year
+     * @return true if flightsPerYear is 12 or more
      */
     public boolean isVeryFrequentFlyer(int flightsPerYear) {
         return flightsPerYear >= 12;
     }
 
     /**
-     * Checks if income is in middle range (20000 < income < 35000).
+     * Checks if income is in middle range (between 20000 and 35000 exclusive).
+     * @param income the annual income
+     * @return true if income is greater than 20000 and less than 35000
      */
     public boolean hasMiddleIncome(double income) {
         return income > 20000 && income < 35000;
     }
 
     /**
-     * Checks if income is high (>= 35000).
+     * Checks if income is high (35000 or more).
+     * @param income the annual income
+     * @return true if income is 35000 or more
      */
     public boolean hasHighIncome(double income) {
         return income >= 35000;
@@ -212,6 +231,8 @@ public class FareService {
 
     /**
      * Checks if preferred class is economy.
+     * @param preferredClass the preferred cabin class
+     * @return true if preferredClass is ECONOMY
      */
     public boolean isEconomyClass(CabinClass preferredClass) {
         return preferredClass == CabinClass.ECONOMY;
@@ -219,6 +240,8 @@ public class FareService {
 
     /**
      * Checks if preferred class is business.
+     * @param preferredClass the preferred cabin class
+     * @return true if preferredClass is BUSINESS
      */
     public boolean isBusinessClass(CabinClass preferredClass) {
         return preferredClass == CabinClass.BUSINESS;
@@ -226,6 +249,8 @@ public class FareService {
 
     /**
      * Checks if destination is Europe.
+     * @param region the destination region
+     * @return true if region is EUROPE
      */
     public boolean isEuropeDestination(DestinationRegion region) {
         return region == DestinationRegion.EUROPE;
@@ -233,6 +258,8 @@ public class FareService {
 
     /**
      * Checks if destination is long-haul (Asia or America).
+     * @param region the destination region
+     * @return true if region is ASIA or AMERICA
      */
     public boolean isLongHaulDestination(DestinationRegion region) {
         return region == DestinationRegion.ASIA || region == DestinationRegion.AMERICA;

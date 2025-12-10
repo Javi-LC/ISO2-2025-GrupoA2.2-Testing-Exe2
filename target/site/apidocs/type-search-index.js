@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html","k":"18"},{"p":"ISO2.Exe2","l":"App"},{"p":"ISO2.Exe2.model","l":"CabinClass","k":"9"},{"p":"ISO2.Exe2.model","l":"DestinationRegion","k":"9"},{"p":"ISO2.Exe2.model","l":"FareOffer"},{"p":"ISO2.Exe2.service","l":"FareService"}];updateSearchResults();

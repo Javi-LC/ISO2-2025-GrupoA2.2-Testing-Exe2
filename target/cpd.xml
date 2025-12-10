@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd xmlns="https://pmd-code.org/schema/cpd-report"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         pmdVersion="7.17.0"
+         timestamp="2025-12-10T11:46:54.386295898+01:00"
+         version="1.0.0"
+         xsi:schemaLocation="https://pmd-code.org/schema/cpd-report https://pmd.github.io/schema/cpd-report_1_0_0.xsd">
+   <file path="/home/aitor/uni/ISO/ISO2-2025-GrupoA2.2-Testing-Exe2/src/main/java/ISO2/Exe2/App.java"
+         totalNumberOfTokens="541"/>
+   <file path="/home/aitor/uni/ISO/ISO2-2025-GrupoA2.2-Testing-Exe2/src/main/java/ISO2/Exe2/model/CabinClass.java"
+         totalNumberOfTokens="8"/>
+   <file path="/home/aitor/uni/ISO/ISO2-2025-GrupoA2.2-Testing-Exe2/src/main/java/ISO2/Exe2/model/DestinationRegion.java"
+         totalNumberOfTokens="12"/>
+   <file path="/home/aitor/uni/ISO/ISO2-2025-GrupoA2.2-Testing-Exe2/src/main/java/ISO2/Exe2/model/FareOffer.java"
+         totalNumberOfTokens="52"/>
+   <file path="/home/aitor/uni/ISO/ISO2-2025-GrupoA2.2-Testing-Exe2/src/main/java/ISO2/Exe2/service/FareService.java"
+         totalNumberOfTokens="649"/>
+</pmd-cpd>

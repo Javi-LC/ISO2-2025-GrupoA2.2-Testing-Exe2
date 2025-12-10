@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Exe2</a> &gt; <a href="index.source.html" class="el_package">ISO2.Exe2</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package ISO2.Exe2;
+
+import ISO2.Exe2.model.CabinClass;
+import ISO2.Exe2.model.DestinationRegion;
+import ISO2.Exe2.model.FareOffer;
+import ISO2.Exe2.service.FareService;
+
+import service.InputService;
+import exception.InputException;
+import parser.IntegerParser;
+import parser.DoubleParser;
+import parser.BooleanParser;
+
+/**
+ * Main application for Airline Fare Calculator.
+ * Simplified version that works directly with primitive types.
+ */
+public class App {
+    
+    /** Default constructor. */
+<span class="nc" id="L21">    public App() { }</span>
+    
+    /**
+     * Main entry point for the application.
+     * @param args command line arguments (not used)
+     */
+    public static void main(String[] args) {
+        
+        try {
+            // Read customer data
+<span class="fc" id="L31">            CustomerData data = readCustomerData();</span>
+            
+            // Create fare service
+<span class="fc" id="L34">            FareService fareService = new FareService();</span>
+            
+            // Determine the best fare
+<span class="fc" id="L37">            FareOffer offer = fareService.determineFare(</span>
+<span class="fc" id="L38">                data.age,</span>
+<span class="fc" id="L39">                data.flightsPerYear,</span>
+<span class="fc" id="L40">                data.isStudent,</span>
+<span class="fc" id="L41">                data.livesWithParents,</span>
+<span class="fc" id="L42">                data.income,</span>
+<span class="fc" id="L43">                data.preferredClass,</span>
+<span class="fc" id="L44">                data.preferredRegion,</span>
+<span class="fc" id="L45">                data.travelsWithChildren</span>
+            );
+            
+            // Display result
+<span class="fc" id="L49">            System.out.println(&quot;\n&quot; + &quot;═&quot;.repeat(45));</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            if (offer != null) {</span>
+<span class="fc" id="L51">                System.out.println(&quot;FARE OFFER FOUND!&quot;);</span>
+<span class="fc" id="L52">                System.out.println(&quot;═&quot;.repeat(45));</span>
+<span class="fc" id="L53">                System.out.println(&quot;Fare Name: &quot; + offer.getName());</span>
+<span class="fc" id="L54">                System.out.println(&quot;Discount:  &quot; + offer.getDiscountPercentage() + &quot;%&quot;);</span>
+<span class="fc" id="L55">                System.out.println(&quot;═&quot;.repeat(45));</span>
+<span class="fc" id="L56">            } else {</span>
+<span class="fc" id="L57">                System.out.println(&quot;NO SPECIAL OFFER AVAILABLE&quot;);</span>
+<span class="fc" id="L58">                System.out.println(&quot;═&quot;.repeat(45));</span>
+<span class="fc" id="L59">                System.out.println(&quot;This customer profile does not match&quot;);</span>
+<span class="fc" id="L60">                System.out.println(&quot;any of our promotional fares.&quot;);</span>
+<span class="fc" id="L61">                System.out.println(&quot;═&quot;.repeat(45));</span>
+            }
+            
+<span class="fc" id="L64">        } catch (InputException e) {</span>
+<span class="fc" id="L65">            System.err.println(&quot;\nError reading input: &quot; + e.getMessage());</span>
+<span class="fc" id="L66">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L67">            System.err.println(&quot;\nInvalid input value: &quot; + e.getMessage());</span>
+<span class="nc" id="L68">        } catch (Exception e) {</span>
+<span class="nc" id="L69">            System.err.println(&quot;\nUnexpected error: &quot; + e.getMessage());</span>
+<span class="nc" id="L70">            e.printStackTrace();</span>
+        }
+<span class="fc" id="L72">    }</span>
+    
+    /**
+     * Reads customer data from user input.
+     */
+    private static CustomerData readCustomerData() throws InputException {
+<span class="fc" id="L78">        InputService input = new InputService();</span>
+<span class="fc" id="L79">        CustomerData data = new CustomerData();</span>
+        
+<span class="fc" id="L81">        System.out.println(&quot;Please enter the following details:&quot;);</span>
+<span class="fc" id="L82">        System.out.println();</span>
+        
+        // Read age
+<span class="fc" id="L85">        data.age = input.readWithParser(&quot;Age (years): &quot;, new IntegerParser());</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (data.age &lt; 0) {</span>
+<span class="fc" id="L87">            throw new InputException(&quot;Age cannot be negative.&quot;);</span>
+        }
+        
+        // Read flights per year
+<span class="fc" id="L91">        data.flightsPerYear = input.readWithParser(&quot;Flights per year: &quot;, new IntegerParser());</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (data.flightsPerYear &lt; 0) {</span>
+<span class="fc" id="L93">            throw new InputException(&quot;Number of flights cannot be negative.&quot;);</span>
+        }
+        
+        // Read student status
+<span class="fc" id="L97">        data.isStudent = input.readWithParser(&quot;Is student? (true/false): &quot;, new BooleanParser());</span>
+        
+        // Read living situation
+<span class="fc" id="L100">        data.livesWithParents = input.readWithParser(&quot;Lives with parents? (true/false): &quot;, new BooleanParser());</span>
+        
+        // Read income
+<span class="fc" id="L103">        data.income = input.readWithParser(&quot;Annual income (€): &quot;, new DoubleParser());</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        if (data.income &lt; 0) {</span>
+<span class="fc" id="L105">            throw new InputException(&quot;Income cannot be negative.&quot;);</span>
+        }
+        
+        // Read preferred class
+<span class="fc" id="L109">        String classStr = input.readString(&quot;Preferred Class (ECONOMY/BUSINESS): &quot;).toUpperCase().trim();</span>
+<span class="fc" id="L110">        data.preferredClass = CabinClass.valueOf(classStr);</span>
+        
+        // Read preferred region
+<span class="fc" id="L113">        String regionStr = input.readString(&quot;Preferred Region (EUROPE/ASIA/AMERICA/OTHER): &quot;).toUpperCase().trim();</span>
+<span class="fc" id="L114">        data.preferredRegion = DestinationRegion.valueOf(regionStr);</span>
+        
+        // Read children status
+<span class="fc" id="L117">        data.travelsWithChildren = input.readWithParser(&quot;Travels with children? (true/false): &quot;, new BooleanParser());</span>
+        
+<span class="fc" id="L119">        return data;</span>
+    }
+    
+    /**
+     * Simple data holder for customer information.
+     */
+    private static class CustomerData {
+        int age;
+        int flightsPerYear;
+        boolean isStudent;
+        boolean livesWithParents;
+        double income;
+        CabinClass preferredClass;
+        DestinationRegion preferredRegion;
+        boolean travelsWithChildren;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

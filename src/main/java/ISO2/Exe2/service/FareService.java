@@ -11,6 +11,13 @@ import ISO2.Exe2.model.FareOffer;
 public class FareService {
 
     /**
+     * Default constructor for FareService.
+     */
+    public FareService() {
+        // Explicit constructor for clarity
+    }
+
+    /**
      * Determines the most suitable fare offer for a customer based on their profile.
      * Delegates to specific rule methods for better testability.
      * 
@@ -24,19 +31,38 @@ public class FareService {
      * @param travelsWithChildren Whether customer travels with children under 12
      * @return FareOffer if eligible, null otherwise
      */
-    public FareOffer determineFare(int age, int flightsPerYear, boolean isStudent, 
-                                   boolean livesWithParents, double income, 
-                                   CabinClass preferredClass, DestinationRegion preferredRegion, 
-                                   boolean travelsWithChildren) {
+    public FareOffer determineFare(final int age, final int flightsPerYear, final boolean isStudent,
+                                   final boolean livesWithParents, final double income,
+                                   final CabinClass preferredClass, final DestinationRegion preferredRegion,
+                                   final boolean travelsWithChildren) {
         
         // Check rules in order of priority
         FareOffer offer;
         
-        if ((offer = checkPajarilloFare(age, flightsPerYear)) != null) return offer;
-        if ((offer = checkGorrionFare(age, flightsPerYear, isStudent, preferredClass)) != null) return offer;
-        if ((offer = checkYoungTravelerFares(age, flightsPerYear, isStudent, livesWithParents, preferredClass)) != null) return offer;
-        if ((offer = checkDiscoverEuropeFares(age, income, flightsPerYear, preferredClass, preferredRegion, travelsWithChildren)) != null) return offer;
-        if ((offer = checkDiscoverWorldFares(age, income, flightsPerYear, preferredClass, preferredRegion, travelsWithChildren)) != null) return offer;
+        offer = checkPajarilloFare(age, flightsPerYear);
+        if (offer != null) {
+            return offer;
+        }
+        
+        offer = checkGorrionFare(age, flightsPerYear, isStudent, preferredClass);
+        if (offer != null) {
+            return offer;
+        }
+        
+        offer = checkYoungTravelerFares(age, flightsPerYear, isStudent, livesWithParents, preferredClass);
+        if (offer != null) {
+            return offer;
+        }
+        
+        offer = checkDiscoverEuropeFares(age, income, flightsPerYear, preferredClass, preferredRegion, travelsWithChildren);
+        if (offer != null) {
+            return offer;
+        }
+        
+        offer = checkDiscoverWorldFares(age, income, flightsPerYear, preferredClass, preferredRegion, travelsWithChildren);
+        if (offer != null) {
+            return offer;
+        }
         
         return null;
     }
@@ -49,7 +75,7 @@ public class FareService {
      * @param flightsPerYear Number of flights per year
      * @return Pajarillo offer or null
      */
-    public FareOffer checkPajarilloFare(int age, int flightsPerYear) {
+    public FareOffer checkPajarilloFare(final int age, final int flightsPerYear) {
         if (isMinor(age) && isFrequentFlyer(flightsPerYear)) {
             return new FareOffer("Pajarillo", 10.0);
         }
@@ -66,7 +92,7 @@ public class FareService {
      * @param preferredClass Preferred cabin class
      * @return Gorrión offer or null
      */
-    public FareOffer checkGorrionFare(int age, int flightsPerYear, boolean isStudent, CabinClass preferredClass) {
+    public FareOffer checkGorrionFare(final int age, final int flightsPerYear, final boolean isStudent, final CabinClass preferredClass) {
         if (isYoungAdult(age) && isStudent && isEconomyClass(preferredClass) && isVeryFrequentFlyer(flightsPerYear)) {
             return new FareOffer("Gorrión", 15.0);
         }
@@ -84,8 +110,9 @@ public class FareService {
      * @param preferredClass Preferred cabin class
      * @return Young traveler offer or null
      */
-    public FareOffer checkYoungTravelerFares(int age, int flightsPerYear, boolean isStudent, 
-                                             boolean livesWithParents, CabinClass preferredClass) {
+    public FareOffer checkYoungTravelerFares(final int age, final int flightsPerYear,
+            final boolean isStudent, final boolean livesWithParents,
+            final CabinClass preferredClass) {
         if (isYoungAdult(age) && !isStudent && isRegularFlyer(flightsPerYear) && isEconomyClass(preferredClass)) {
             if (livesWithParents) {
                 return new FareOffer("Travel While You Can", 5.0);
@@ -108,9 +135,9 @@ public class FareService {
      * @param travelsWithChildren Whether customer travels with children
      * @return Discover Europe offer or null
      */
-    public FareOffer checkDiscoverEuropeFares(int age, double income, int flightsPerYear, 
-                                              CabinClass preferredClass, DestinationRegion preferredRegion, 
-                                              boolean travelsWithChildren) {
+    public FareOffer checkDiscoverEuropeFares(final int age, final double income,
+            final int flightsPerYear, final CabinClass preferredClass,
+            final DestinationRegion preferredRegion, final boolean travelsWithChildren) {
         if (isMatureAdult(age) && hasMiddleIncome(income) && isFrequentFlyer(flightsPerYear) 
             && isEconomyClass(preferredClass) && isEuropeDestination(preferredRegion)) {
             
@@ -135,9 +162,9 @@ public class FareService {
      * @param travelsWithChildren Whether customer travels with children
      * @return Discover World offer or null
      */
-    public FareOffer checkDiscoverWorldFares(int age, double income, int flightsPerYear, 
-                                             CabinClass preferredClass, DestinationRegion preferredRegion, 
-                                             boolean travelsWithChildren) {
+    public FareOffer checkDiscoverWorldFares(final int age, final double income,
+            final int flightsPerYear, final CabinClass preferredClass,
+            final DestinationRegion preferredRegion, final boolean travelsWithChildren) {
         if (isMatureAdult(age) && hasHighIncome(income) && isFrequentFlyer(flightsPerYear) 
             && isBusinessClass(preferredClass) && isLongHaulDestination(preferredRegion)) {
             
@@ -157,84 +184,84 @@ public class FareService {
     /**
      * Checks if customer is a minor (age < 18).
      */
-    public boolean isMinor(int age) {
+    public boolean isMinor(final int age) {
         return age < 18;
     }
 
     /**
      * Checks if customer is a young adult (18-25 years old).
      */
-    public boolean isYoungAdult(int age) {
+    public boolean isYoungAdult(final int age) {
         return age >= 18 && age <= 25;
     }
 
     /**
      * Checks if customer is a mature adult (age > 25).
      */
-    public boolean isMatureAdult(int age) {
+    public boolean isMatureAdult(final int age) {
         return age > 25;
     }
 
     /**
      * Checks if customer is a regular flyer (>= 3 flights/year).
      */
-    public boolean isRegularFlyer(int flightsPerYear) {
+    public boolean isRegularFlyer(final int flightsPerYear) {
         return flightsPerYear >= 3;
     }
 
     /**
      * Checks if customer is a frequent flyer (>= 6 flights/year).
      */
-    public boolean isFrequentFlyer(int flightsPerYear) {
+    public boolean isFrequentFlyer(final int flightsPerYear) {
         return flightsPerYear >= 6;
     }
 
     /**
      * Checks if customer is a very frequent flyer (>= 12 flights/year).
      */
-    public boolean isVeryFrequentFlyer(int flightsPerYear) {
+    public boolean isVeryFrequentFlyer(final int flightsPerYear) {
         return flightsPerYear >= 12;
     }
 
     /**
      * Checks if income is in middle range (20000 < income < 35000).
      */
-    public boolean hasMiddleIncome(double income) {
+    public boolean hasMiddleIncome(final double income) {
         return income > 20000 && income < 35000;
     }
 
     /**
      * Checks if income is high (>= 35000).
      */
-    public boolean hasHighIncome(double income) {
+    public boolean hasHighIncome(final double income) {
         return income >= 35000;
     }
 
     /**
      * Checks if preferred class is economy.
      */
-    public boolean isEconomyClass(CabinClass preferredClass) {
+    public boolean isEconomyClass(final CabinClass preferredClass) {
         return preferredClass == CabinClass.ECONOMY;
     }
 
     /**
      * Checks if preferred class is business.
      */
-    public boolean isBusinessClass(CabinClass preferredClass) {
+    public boolean isBusinessClass(final CabinClass preferredClass) {
         return preferredClass == CabinClass.BUSINESS;
     }
 
     /**
      * Checks if destination is Europe.
      */
-    public boolean isEuropeDestination(DestinationRegion region) {
+    public boolean isEuropeDestination(final DestinationRegion region) {
         return region == DestinationRegion.EUROPE;
     }
 
     /**
      * Checks if destination is long-haul (Asia or America).
      */
-    public boolean isLongHaulDestination(DestinationRegion region) {
+    public boolean isLongHaulDestination(final DestinationRegion region) {
         return region == DestinationRegion.ASIA || region == DestinationRegion.AMERICA;
     }
 }

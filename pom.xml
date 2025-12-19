@@ -9,6 +9,13 @@
 
   <name>Exe2</name>
   <url>http://maven.apache.org</url>
+  
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
   <dependencies>
     <!-- https://mvnrepository.com/artifact/junit/junit -->
     <dependency>
@@ -16,11 +23,14 @@
       <artifactId>junit</artifactId>
       <version>4.13</version>
     </dependency>
+    <!-- CommandLine dependency - needs to be installed to local repository first -->
+    <!--
     <dependency>
     	<groupId>ISO2</groupId>
     	<artifactId>CommandLine</artifactId>
     	<version>0.0.3</version>
 	  </dependency>
+	  -->
   </dependencies>
   <build>
     <finalName>JunitExample</finalName>
@@ -106,24 +116,48 @@
         </reportSets>
       </plugin>
       <!-- commented for lab session concerning maintenance -->
-      <!--
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.21.0</version>
         <configuration>
           <skipEmptyReport>false</skipEmptyReport>
+          <rulesets>
+            <ruleset>/rulesets/java/basic.xml</ruleset>
+            <ruleset>/rulesets/java/imports.xml</ruleset>
+            <ruleset>/rulesets/java/unnecessary.xml</ruleset>
+            <ruleset>/rulesets/java/braces.xml</ruleset>
+            <ruleset>/rulesets/java/naming.xml</ruleset>
+            <ruleset>/rulesets/java/design.xml</ruleset>
+            <ruleset>/rulesets/java/coupling.xml</ruleset>
+            <ruleset>/rulesets/java/controversial.xml</ruleset>
+            <ruleset>/rulesets/java/optimizations.xml</ruleset>
+          </rulesets>
+          <reportSets>
+            <reportSet>
+              <reports>
+                <report>pmd</report>
+                <report>cpd</report>
+              </reports>
+            </reportSet>
+          </reportSets>
         </configuration>
       </plugin>
+      <!-- SpotBugs temporarily commented due to Java version incompatibility
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>4.8.2.0</version>
         <configuration>
           <skipEmptyReport>false</skipEmptyReport>
         </configuration>
       </plugin>
+      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.3.1</version>
         <configuration>
           <skipEmptyReport>false</skipEmptyReport>
         </configuration>
@@ -131,12 +165,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jxr-plugin</artifactId>
+        <version>3.3.1</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.6.3</version>
       </plugin>
-      -->
+      
     </plugins>
   </reporting>
 </project>

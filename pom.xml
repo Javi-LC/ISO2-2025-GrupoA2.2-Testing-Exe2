@@ -17,10 +17,12 @@
       <version>4.13</version>
     </dependency>
     <dependency>
-    	<groupId>ISO2</groupId>
-    	<artifactId>CommandLine</artifactId>
-    	<version>0.0.3</version>
-	  </dependency>
+      <groupId>ISO2</groupId>
+      <artifactId>CommandLine</artifactId>
+      <version>0.0.3</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/CommandLine-0.0.3.jar</systemPath>
+    </dependency>
   </dependencies>
   <build>
     <finalName>JunitExample</finalName>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FareService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Exe2</a> &gt; <a href="index.source.html" class="el_package">ISO2.Exe2.service</a> &gt; <span class="el_source">FareService.java</span></div><h1>FareService.java</h1><pre class="source lang-java linenums">package ISO2.Exe2.service;
+
+import ISO2.Exe2.model.CabinClass;
+import ISO2.Exe2.model.DestinationRegion;
+import ISO2.Exe2.model.FareOffer;
+
+/**
+ * Fare Service divided into small, testable methods.
+ * Each rule is in its own method with only necessary parameters.
+ */
+<span class="fc" id="L11">public class FareService {</span>
+
+    /**
+     * Determines the most suitable fare offer for a customer based on their profile.
+     * Delegates to specific rule methods for better testability.
+     * 
+     * @param age Customer age in years
+     * @param flightsPerYear Number of flights taken per year
+     * @param isStudent Whether customer is a university student
+     * @param livesWithParents Whether customer lives with parents
+     * @param income Annual income in euros
+     * @param preferredClass Preferred cabin class (ECONOMY or BUSINESS)
+     * @param preferredRegion Preferred travel region
+     * @param travelsWithChildren Whether customer travels with children under 12
+     * @return FareOffer if eligible, null otherwise
+     */
+    public FareOffer determineFare(int age, int flightsPerYear, boolean isStudent, 
+                                   boolean livesWithParents, double income, 
+                                   CabinClass preferredClass, DestinationRegion preferredRegion, 
+                                   boolean travelsWithChildren) {
+        
+        // Check rules in order of priority
+        FareOffer offer;
+        
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if ((offer = checkPajarilloFare(age, flightsPerYear)) != null) return offer;</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if ((offer = checkGorrionFare(age, flightsPerYear, isStudent, preferredClass)) != null) return offer;</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if ((offer = checkYoungTravelerFares(age, flightsPerYear, isStudent, livesWithParents, preferredClass)) != null) return offer;</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if ((offer = checkDiscoverEuropeFares(age, income, flightsPerYear, preferredClass, preferredRegion, travelsWithChildren)) != null) return offer;</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if ((offer = checkDiscoverWorldFares(age, income, flightsPerYear, preferredClass, preferredRegion, travelsWithChildren)) != null) return offer;</span>
+        
+<span class="fc" id="L41">        return null;</span>
+    }
+
+    /**
+     * Rule 1: Pajarillo Fare
+     * For minors who travel frequently.
+     * 
+     * @param age Customer age
+     * @param flightsPerYear Number of flights per year
+     * @return Pajarillo offer or null
+     */
+    public FareOffer checkPajarilloFare(int age, int flightsPerYear) {
+<span class="fc bfc" id="L53" title="All 4 branches covered.">        if (isMinor(age) &amp;&amp; isFrequentFlyer(flightsPerYear)) {</span>
+<span class="fc" id="L54">            return new FareOffer(&quot;Pajarillo&quot;, 10.0);</span>
+        }
+<span class="fc" id="L56">        return null;</span>
+    }
+
+    /**
+     * Rule 2: Gorrión Fare
+     * For young students traveling in economy class monthly.
+     * 
+     * @param age Customer age
+     * @param flightsPerYear Number of flights per year
+     * @param isStudent Whether customer is a student
+     * @param preferredClass Preferred cabin class
+     * @return Gorrión offer or null
+     */
+    public FareOffer checkGorrionFare(int age, int flightsPerYear, boolean isStudent, CabinClass preferredClass) {
+<span class="fc bfc" id="L70" title="All 8 branches covered.">        if (isYoungAdult(age) &amp;&amp; isStudent &amp;&amp; isEconomyClass(preferredClass) &amp;&amp; isVeryFrequentFlyer(flightsPerYear)) {</span>
+<span class="fc" id="L71">            return new FareOffer(&quot;Gorrión&quot;, 15.0);</span>
+        }
+<span class="fc" id="L73">        return null;</span>
+    }
+
+    /**
+     * Rules 3 &amp; 4: Young Traveler Fares
+     * For young workers traveling in economy class.
+     * 
+     * @param age Customer age
+     * @param flightsPerYear Number of flights per year
+     * @param isStudent Whether customer is a student
+     * @param livesWithParents Whether customer lives with parents
+     * @param preferredClass Preferred cabin class
+     * @return Young traveler offer or null
+     */
+    public FareOffer checkYoungTravelerFares(int age, int flightsPerYear, boolean isStudent, 
+                                             boolean livesWithParents, CabinClass preferredClass) {
+<span class="fc bfc" id="L89" title="All 8 branches covered.">        if (isYoungAdult(age) &amp;&amp; !isStudent &amp;&amp; isRegularFlyer(flightsPerYear) &amp;&amp; isEconomyClass(preferredClass)) {</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">            if (livesWithParents) {</span>
+<span class="fc" id="L91">                return new FareOffer(&quot;Travel While You Can&quot;, 5.0);</span>
+            } else {
+<span class="fc" id="L93">                return new FareOffer(&quot;Daring to Leave the Nest&quot;, 25.0);</span>
+            }
+        }
+<span class="fc" id="L96">        return null;</span>
+    }
+
+    /**
+     * Rules 5 &amp; 6: Discover Europe Fares
+     * For mature adults with middle income traveling to Europe in economy.
+     * 
+     * @param age Customer age
+     * @param income Annual income
+     * @param flightsPerYear Number of flights per year
+     * @param preferredClass Preferred cabin class
+     * @param preferredRegion Preferred travel region
+     * @param travelsWithChildren Whether customer travels with children
+     * @return Discover Europe offer or null
+     */
+    public FareOffer checkDiscoverEuropeFares(int age, double income, int flightsPerYear, 
+                                              CabinClass preferredClass, DestinationRegion preferredRegion, 
+                                              boolean travelsWithChildren) {
+<span class="fc bfc" id="L114" title="All 6 branches covered.">        if (isMatureAdult(age) &amp;&amp; hasMiddleIncome(income) &amp;&amp; isFrequentFlyer(flightsPerYear) </span>
+<span class="fc bfc" id="L115" title="All 4 branches covered.">            &amp;&amp; isEconomyClass(preferredClass) &amp;&amp; isEuropeDestination(preferredRegion)) {</span>
+            
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            if (travelsWithChildren) {</span>
+<span class="fc" id="L118">                return new FareOffer(&quot;Discover Europe with Your Little Ones&quot;, 10.0);</span>
+            } else {
+<span class="fc" id="L120">                return new FareOffer(&quot;Discover Europe&quot;, 15.0);</span>
+            }
+        }
+<span class="fc" id="L123">        return null;</span>
+    }
+
+    /**
+     * Rules 7 &amp; 8: Discover the World Fares
+     * For mature adults with high income traveling to Asia/America in business.
+     * 
+     * @param age Customer age
+     * @param income Annual income
+     * @param flightsPerYear Number of flights per year
+     * @param preferredClass Preferred cabin class
+     * @param preferredRegion Preferred travel region
+     * @param travelsWithChildren Whether customer travels with children
+     * @return Discover World offer or null
+     */
+    public FareOffer checkDiscoverWorldFares(int age, double income, int flightsPerYear, 
+                                             CabinClass preferredClass, DestinationRegion preferredRegion, 
+                                             boolean travelsWithChildren) {
+<span class="fc bfc" id="L141" title="All 6 branches covered.">        if (isMatureAdult(age) &amp;&amp; hasHighIncome(income) &amp;&amp; isFrequentFlyer(flightsPerYear) </span>
+<span class="fc bfc" id="L142" title="All 4 branches covered.">            &amp;&amp; isBusinessClass(preferredClass) &amp;&amp; isLongHaulDestination(preferredRegion)) {</span>
+            
+<span class="fc bfc" id="L144" title="All 2 branches covered.">            if (travelsWithChildren) {</span>
+<span class="fc" id="L145">                return new FareOffer(&quot;Discover the World with Your Little Ones&quot;, 10.0);</span>
+            } else {
+<span class="fc" id="L147">                return new FareOffer(&quot;Discover the World&quot;, 20.0);</span>
+            }
+        }
+<span class="fc" id="L150">        return null;</span>
+    }
+
+    // ========================================================================
+    // HELPER METHODS - Small, testable predicates
+    // ========================================================================
+
+    /**
+     * Checks if customer is a minor (age &lt; 18).
+     */
+    public boolean isMinor(int age) {
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        return age &lt; 18;</span>
+    }
+
+    /**
+     * Checks if customer is a young adult (18-25 years old).
+     */
+    public boolean isYoungAdult(int age) {
+<span class="fc bfc" id="L168" title="All 4 branches covered.">        return age &gt;= 18 &amp;&amp; age &lt;= 25;</span>
+    }
+
+    /**
+     * Checks if customer is a mature adult (age &gt; 25).
+     */
+    public boolean isMatureAdult(int age) {
+<span class="fc bfc" id="L175" title="All 2 branches covered.">        return age &gt; 25;</span>
+    }
+
+    /**
+     * Checks if customer is a regular flyer (&gt;= 3 flights/year).
+     */
+    public boolean isRegularFlyer(int flightsPerYear) {
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        return flightsPerYear &gt;= 3;</span>
+    }
+
+    /**
+     * Checks if customer is a frequent flyer (&gt;= 6 flights/year).
+     */
+    public boolean isFrequentFlyer(int flightsPerYear) {
+<span class="fc bfc" id="L189" title="All 2 branches covered.">        return flightsPerYear &gt;= 6;</span>
+    }
+
+    /**
+     * Checks if customer is a very frequent flyer (&gt;= 12 flights/year).
+     */
+    public boolean isVeryFrequentFlyer(int flightsPerYear) {
+<span class="fc bfc" id="L196" title="All 2 branches covered.">        return flightsPerYear &gt;= 12;</span>
+    }
+
+    /**
+     * Checks if income is in middle range (20000 &lt; income &lt; 35000).
+     */
+    public boolean hasMiddleIncome(double income) {
+<span class="fc bfc" id="L203" title="All 4 branches covered.">        return income &gt; 20000 &amp;&amp; income &lt; 35000;</span>
+    }
+
+    /**
+     * Checks if income is high (&gt;= 35000).
+     */
+    public boolean hasHighIncome(double income) {
+<span class="fc bfc" id="L210" title="All 2 branches covered.">        return income &gt;= 35000;</span>
+    }
+
+    /**
+     * Checks if preferred class is economy.
+     */
+    public boolean isEconomyClass(CabinClass preferredClass) {
+<span class="fc bfc" id="L217" title="All 2 branches covered.">        return preferredClass == CabinClass.ECONOMY;</span>
+    }
+
+    /**
+     * Checks if preferred class is business.
+     */
+    public boolean isBusinessClass(CabinClass preferredClass) {
+<span class="fc bfc" id="L224" title="All 2 branches covered.">        return preferredClass == CabinClass.BUSINESS;</span>
+    }
+
+    /**
+     * Checks if destination is Europe.
+     */
+    public boolean isEuropeDestination(DestinationRegion region) {
+<span class="fc bfc" id="L231" title="All 2 branches covered.">        return region == DestinationRegion.EUROPE;</span>
+    }
+
+    /**
+     * Checks if destination is long-haul (Asia or America).
+     */
+    public boolean isLongHaulDestination(DestinationRegion region) {
+<span class="fc bfc" id="L238" title="All 4 branches covered.">        return region == DestinationRegion.ASIA || region == DestinationRegion.AMERICA;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

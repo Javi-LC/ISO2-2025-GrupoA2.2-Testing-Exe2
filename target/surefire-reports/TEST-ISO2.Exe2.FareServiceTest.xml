@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="ISO2.Exe2.FareServiceTest" time="0.005" tests="113" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="25"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/home/aitor/Universidad/Tercer Curso/Primer cuatrimestre/Ingenieria de software 2/LAB/Code/ISO2-2025-GrupoA2.2-Testing-Exe2/target/test-classes:/home/aitor/Universidad/Tercer Curso/Primer cuatrimestre/Ingenieria de software 2/LAB/Code/ISO2-2025-GrupoA2.2-Testing-Exe2/target/classes:/home/aitor/.m2/repository/junit/junit/4.13/junit-4.13.jar:/home/aitor/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/aitor/.m2/repository/ISO2/CommandLine/0.0.3/CommandLine-0.0.3.jar:"/>
+    <property name="java.vm.vendor" value="Arch Linux"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://openjdk.org/"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="25"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="ES"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-25-openjdk/lib"/>
+    <property name="sun.java.command" value="/home/aitor/Universidad/Tercer Curso/Primer cuatrimestre/Ingenieria de software 2/LAB/Code/ISO2-2025-GrupoA2.2-Testing-Exe2/target/surefire/surefirebooter-20251222164523734_3.jar /home/aitor/Universidad/Tercer Curso/Primer cuatrimestre/Ingenieria de software 2/LAB/Code/ISO2-2025-GrupoA2.2-Testing-Exe2/target/surefire 2025-12-22T16-45-23_661-jvmRun1 surefire-20251222164523734_1tmp surefire_0-20251222164523734_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/home/aitor/Universidad/Tercer Curso/Primer cuatrimestre/Ingenieria de software 2/LAB/Code/ISO2-2025-GrupoA2.2-Testing-Exe2/target/test-classes:/home/aitor/Universidad/Tercer Curso/Primer cuatrimestre/Ingenieria de software 2/LAB/Code/ISO2-2025-GrupoA2.2-Testing-Exe2/target/classes:/home/aitor/.m2/repository/junit/junit/4.13/junit-4.13.jar:/home/aitor/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/aitor/.m2/repository/ISO2/CommandLine/0.0.3/CommandLine-0.0.3.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/aitor"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-10-21"/>
+    <property name="java.home" value="/usr/lib/jvm/java-25-openjdk"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/home/aitor/Universidad/Tercer Curso/Primer cuatrimestre/Ingenieria de software 2/LAB/Code/ISO2-2025-GrupoA2.2-Testing-Exe2"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="surefire.real.class.path" value="/home/aitor/Universidad/Tercer Curso/Primer cuatrimestre/Ingenieria de software 2/LAB/Code/ISO2-2025-GrupoA2.2-Testing-Exe2/target/surefire/surefirebooter-20251222164523734_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="25.0.1"/>
+    <property name="user.name" value="aitor"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.18.2-2-cachyos"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="/home/aitor/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="25.0.1"/>
+    <property name="user.dir" value="/home/aitor/Universidad/Tercer Curso/Primer cuatrimestre/Ingenieria de software 2/LAB/Code/ISO2-2025-GrupoA2.2-Testing-Exe2"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Arch Linux"/>
+    <property name="java.vm.version" value="25.0.1"/>
+    <property name="stdin.encoding" value="UTF-8"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="69.0"/>
+  </properties>
+  <testcase name="testDecision4_DiscoverEurope_False_AsiaDestination" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testBoundary_AgeYoungToMature" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC2_TTTF_Gorrion" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse02_YoungStudentFrequent" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision5_DiscoverWorld_False_NotMatureAdult" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC5_TTFTT_DiscoverWorld" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC4_FTTTT_DiscoverEurope" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsFrequentFlyer_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision3_YoungTraveler_False_IsStudent" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsFrequentFlyer_False" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsLongHaulDestination_Other_False" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse12_MinorMinimalFlights" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testHasHighIncome_False" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision1_Pajarillo_False_NotFrequent" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsMatureAdult_False" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC5_TTTFT_DiscoverWorld" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision4_DiscoverEurope_False_NotFrequent" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC4_TTTTT_DiscoverEurope_WithChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC2_TTTT_Gorrion" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse09_MatureAdultWorldAmerica" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse17_MiddleIncomeBusinessClass" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsVeryFrequentFlyer_False" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC4_TTTTT_DiscoverEurope_NoChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsBusinessClass_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsLongHaulDestination_Asia_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision2_Gorrion_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision4_DiscoverEurope_False_LowIncome" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision5_DiscoverWorld_False_EuropeDestination" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC5_TTTTT_DiscoverWorld_America_NoChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsVeryFrequentFlyer_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsEconomyClass_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC5_FTTTT_DiscoverWorld" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision3_YoungTraveler_False_NotYoungAdult" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsYoungAdult_True_Lower" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsYoungAdult_True_Upper" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision1_Pajarillo_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC1_TF_Pajarillo" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision2_Gorrion_False_NotVeryFrequent" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsRegularFlyer_False" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse13_NegativeAge" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC3_TTTF_YoungTraveler" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision3_YoungTraveler_True_Independent" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC4_TTTFT_DiscoverEurope" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC5_TTTTT_DiscoverWorld_WithChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse10_MatureAdultWorldWithChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision2_Gorrion_False_NotStudent" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsEuropeDestination_False" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse07_MatureAdultEuropeWithChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC1_TT_Pajarillo" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC4_TTTTF_DiscoverEurope" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision5_DiscoverWorld_True_America_NoChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsEuropeDestination_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testBoundary_IncomeMiddleLower" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsMinor_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC3_FTTT_YoungTraveler" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision4_DiscoverEurope_False_NotMatureAdult" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC4_TFTTT_DiscoverEurope" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse14_MatureAdultLowIncome" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision5_DiscoverWorld_True_WithChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision3_YoungTraveler_True_WithParents" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsEconomyClass_False" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC5_TTTTF_DiscoverWorld" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse06_MatureAdultEurope" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision5_DiscoverWorld_False_NotHighIncome" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsLongHaulDestination_Europe_False" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC5_TTTTT_DiscoverWorld_Asia_NoChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsYoungAdult_False_Above" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsYoungAdult_False_Below" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC3_TTTT_YoungTraveler_Independent" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision5_DiscoverWorld_True_Asia_NoChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse05_BoundaryAge25WithParents" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision2_Gorrion_False_BusinessClass" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC5_TFTTT_DiscoverWorld" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC2_FTTT_Gorrion" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testHasMiddleIncome_False_Lower" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testHasMiddleIncome_False_Upper" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision5_DiscoverWorld_False_EconomyClass" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse04_YoungWorkerIndependent" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testBoundary_FlightsVeryFrequentFlyer" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testBoundary_IncomeMiddleToHigh" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision4_DiscoverEurope_True_WithChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse01_MinorFrequentFlyer" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC2_TTFT_Gorrion" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsMinor_False_Boundary" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse11_MinorInsufficientFlights" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testBoundary_AgePajarilloToGorrion" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC3_TFTT_YoungTraveler" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision3_YoungTraveler_False_NotRegular" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse15_StudentBusinessClass" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC3_TTTT_YoungTraveler_WithParents" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC3_TTFT_YoungTraveler" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision5_DiscoverWorld_False_NotFrequent" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testHasHighIncome_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision4_DiscoverEurope_True_NoChildren" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse08_MatureAdultWorldAsia" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision5_DiscoverWorld_False_OtherDestination" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsLongHaulDestination_America_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsMatureAdult_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testBoundary_FlightsFrequentFlyer" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testHasMiddleIncome_True_Lower" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsRegularFlyer_True" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testHasMiddleIncome_True_Upper" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision4_DiscoverEurope_False_BusinessClass" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse16_HighIncomeEconomyClass" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision2_Gorrion_False_NotYoungAdult" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision3_YoungTraveler_False_BusinessClass" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testEachUse03_YoungWorkerWithParents" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC1_FT_Pajarillo" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testIsBusinessClass_False" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC4_TTFTT_DiscoverEurope" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision4_DiscoverEurope_False_HighIncome" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testMCDC2_TFTT_Gorrion" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+  <testcase name="testDecision1_Pajarillo_False_NotMinor" classname="ISO2.Exe2.FareServiceTest" time="0.0"/>
+</testsuite>

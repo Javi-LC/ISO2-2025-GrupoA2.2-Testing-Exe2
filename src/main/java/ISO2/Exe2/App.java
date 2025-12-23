@@ -38,19 +38,14 @@ public class App {
             );
             
             // Display result
-            System.out.println("\n" + "═".repeat(45));
             if (offer != null) {
                 System.out.println("FARE OFFER FOUND!");
-                System.out.println("═".repeat(45));
                 System.out.println("Fare Name: " + offer.getName());
                 System.out.println("Discount:  " + offer.getDiscountPercentage() + "%");
-                System.out.println("═".repeat(45));
             } else {
                 System.out.println("NO SPECIAL OFFER AVAILABLE");
-                System.out.println("═".repeat(45));
                 System.out.println("This customer profile does not match");
                 System.out.println("any of our promotional fares.");
-                System.out.println("═".repeat(45));
             }
             
         } catch (InputException e) {
